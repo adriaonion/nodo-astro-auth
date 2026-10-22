@@ -1,2 +1,0 @@
-# En producción, configura la URL HTTPS de TU backend antes de compilar.
-PUBLIC_API_URL=http://localhost:3000/graphql
