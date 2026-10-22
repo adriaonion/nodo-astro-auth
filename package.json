@@ -5,6 +5,7 @@
   "workspaces": ["back", "front", "base-react"],
   "engines": { "node": ">=22.12.0" },
   "scripts": {
+    "demo:netlify": "node scripts/demo-netlify.mjs",
     "setup": "node scripts/setup.mjs && npm run db:push -w back && npm run seed -w back",
     "dev": "npm run build -w back && concurrently -k -n API,WEB \"npm run start -w back\" \"npm run dev -w front\"",
     "build": "npm run build -w back && npm run build -w front",

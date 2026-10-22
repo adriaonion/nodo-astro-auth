@@ -4,3 +4,4 @@ publish = "front/dist"
 
 [build.environment]
 NODE_VERSION = "24"
+PUBLIC_API_URL = "http://localhost:3000/graphql"
