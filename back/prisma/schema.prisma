@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  passwordHash String
+  role String @default("CLIENTE")
+  sessions Session[]
+  orders Order[]
+  createdAt DateTime @default(now())
+}
+model Session {
+  id String @id @default(uuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  revoked Boolean @default(false)
+}
+model Category {
+  id String @id @default(uuid())
+  name String @unique
+  products Product[]
+}
+model Product {
+  id String @id @default(uuid())
+  name String
+  description String
+  priceCents Int
+  stock Int
+  categoryId String
+  category Category @relation(fields: [categoryId], references: [id])
+}
+model Order {
+  id String @id @default(uuid())
+  requestKey String @unique
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  totalCents Int
+  status String @default("CONFIRMADO")
+  createdAt DateTime @default(now())
+  items OrderItem[]
+}
+model OrderItem {
+  id String @id @default(uuid())
+  orderId String
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  name String
+  quantity Int
+  priceCents Int
+}
