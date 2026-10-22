@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.env
+*.db
+*.db-journal
+*.log
+ACCESOS_LOCALES.txt
+test-results/
